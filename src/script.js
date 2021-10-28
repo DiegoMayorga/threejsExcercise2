@@ -41,9 +41,9 @@ function resize() {
 }
 
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.x = 0
-camera.position.y = 4
-camera.position.z = 0
+camera.position.x = 20
+camera.position.y = 30
+camera.position.z = 40
 scene.add(camera)
 
 const renderer = new THREE.WebGLRenderer()
@@ -70,10 +70,12 @@ const random = (limit) => {
 
 const mControls = new function () {
     this.addBuilding = () => {
-        const height = random(15)
-        const geometry = new THREE.BoxGeometry(1, height, 1)
-        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
-        const cube = new THREE.Mesh(geometry, material)
+        const material = new THREE.MeshPhongMaterial({
+            color: "#" + random(16777215).toString(16)
+        });
+        const cube = new THREE.Mesh(new THREE.BoxGeometry(2, random(35), 2), material)
+        cube.position.x = random(50) - random(50)
+        cube.position.z = random(50) - random(50)
         scene.add(cube)
     }
 }
